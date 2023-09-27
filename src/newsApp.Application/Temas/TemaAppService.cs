@@ -8,12 +8,19 @@ using Volo.Abp.Domain.Repositories;
 
 namespace newsApp.Temas
 {
-    public class TemaAppService : CrudAppService<Tema, TemaDto, int>, ITemaAppService
+    public class TemaAppService : newsAppAppService, ITemaAppService
     {
+        private readonly IRepository<Tema, int> _repository;
         public TemaAppService(IRepository<Tema, int> repository) 
-            : base(repository)
         {
+            _repository = repository;
+        }
 
+        public async Task<ICollection<TemaDto>> GetTemasAsync()
+        {
+            var Temas = await _repository.GetListAsync();
+
+            return ObjectMapper.Map<ICollection<Tema>, ICollection<TemaDto>>(Temas);
         }
     }
 }
