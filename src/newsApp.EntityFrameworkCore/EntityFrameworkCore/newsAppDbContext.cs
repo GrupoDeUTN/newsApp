@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using newsApp.Noticias;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -53,6 +55,10 @@ public class newsAppDbContext :
 
     #endregion
 
+    #region Entidades de dominio
+    public DbSet<Noticia> Noticias { get; set; }
+    #endregion
+
     public newsAppDbContext(DbContextOptions<newsAppDbContext> options)
         : base(options)
     {
@@ -82,5 +88,15 @@ public class newsAppDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        //Entidad noticia
+        builder.Entity<Noticia>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Noticias", newsAppConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Descripcion).IsRequired().HasMaxLength(500);
+            b.Property(x => x.FechaPublicacion).IsRequired(); //formato
+        });
     }
 }
