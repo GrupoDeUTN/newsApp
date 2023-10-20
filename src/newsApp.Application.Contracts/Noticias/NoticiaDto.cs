@@ -12,5 +12,6 @@ namespace newsApp.Noticias
         public DateTime FechaPublicacion { get; set; }
         public string Autor { get; set; }
         public string Fuente { get; set; }
+        public DateTime FechaIngreso { get; set; }
     }
 }
