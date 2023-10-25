@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+ feature/3-lista-de-busquedas
 using newsApp.Busquedas;
+
+using newsApp.Temas;
+
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -55,8 +59,15 @@ public class newsAppDbContext :
 
     #endregion
 
+ feature/3-lista-de-busquedas
     #region
     public DbSet<Busqueda> Busquedas { get; set; }
+
+    #region Entidades de dominio
+
+    public DbSet<Tema> Temas { get; set; } 
+
+
     #endregion
 
     public newsAppDbContext(DbContextOptions<newsAppDbContext> options)
@@ -89,11 +100,20 @@ public class newsAppDbContext :
         //    //...
         //});
 
+ feature/3-lista-de-busquedas
         builder.Entity<Busqueda>(b =>
         {
             b.ToTable(newsAppConsts.DbTablePrefix + "Busquedas", newsAppConsts.DbSchema);
             b.ConfigureByConvention();
            // b.Property(x => x.Texto).IsRequired().HasMaxLength(500); 
+
+        //Entidad tema
+        builder.Entity<Tema>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Temas", newsAppConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Nombre).IsRequired().HasMaxLength(128);
+
         });
     }
 }
