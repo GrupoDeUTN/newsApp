@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
- feature/3-lista-de-busquedas
+
 using newsApp.Busquedas;
-
+using newsApp.Notificaciones;
 using newsApp.Temas;
-
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -53,6 +52,11 @@ public class newsAppDbContext :
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
 
+    #region Entidades de dominio
+    public DbSet<Notificacion> Notificaciones { get; set; }
+
+    #endregion
+
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
@@ -90,6 +94,15 @@ public class newsAppDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+
+
+
+        //Entidad notificacion
+        builder.Entity<Notificacion>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Notificaciones", newsAppConsts.DbSchema);
+            b.ConfigureByConvention(); 
+        });
 
         /* Configure your own tables/entities inside here */
 
