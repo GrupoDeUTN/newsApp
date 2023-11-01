@@ -1,5 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+ feature/2-obtención-de-noticias
 using newsApp.Noticias;
+
+
+using newsApp.Busquedas;
+using newsApp.Notificaciones;
+using newsApp.Temas;
+ master
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -49,14 +56,31 @@ public class newsAppDbContext :
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
 
+    #region Entidades de dominio
+    public DbSet<Notificacion> Notificaciones { get; set; }
+
+    #endregion
+
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     #endregion
 
+ feature/2-obtención-de-noticias
     #region Entidades de dominio
     public DbSet<Noticia> Noticias { get; set; }
+
+ feature/3-lista-de-busquedas
+    #region
+    public DbSet<Busqueda> Busquedas { get; set; }
+
+    #region Entidades de dominio
+
+    public DbSet<Tema> Temas { get; set; } 
+
+
+ master
     #endregion
 
     public newsAppDbContext(DbContextOptions<newsAppDbContext> options)
@@ -80,6 +104,15 @@ public class newsAppDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
+
+
+        //Entidad notificacion
+        builder.Entity<Notificacion>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Notificaciones", newsAppConsts.DbSchema);
+            b.ConfigureByConvention(); 
+        });
+
         /* Configure your own tables/entities inside here */
 
         //builder.Entity<YourEntity>(b =>
@@ -89,6 +122,7 @@ public class newsAppDbContext :
         //    //...
         //});
 
+ feature/2-obtención-de-noticias
         //Entidad noticia
         builder.Entity<Noticia>(b =>
         {
@@ -97,6 +131,22 @@ public class newsAppDbContext :
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired().HasMaxLength(500);
             b.Property(x => x.FechaPublicacion).IsRequired(); //formato
+
+ feature/3-lista-de-busquedas
+        builder.Entity<Busqueda>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Busquedas", newsAppConsts.DbSchema);
+            b.ConfigureByConvention();
+           // b.Property(x => x.Texto).IsRequired().HasMaxLength(500); 
+
+        //Entidad tema
+        builder.Entity<Tema>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Temas", newsAppConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Nombre).IsRequired().HasMaxLength(128);
+
+ master
         });
     }
 }

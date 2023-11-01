@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using newsApp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using newsApp.EntityFrameworkCore;
 namespace newsApp.Migrations
 {
     [DbContext(typeof(newsAppDbContext))]
-    partial class newsAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231004215647_create_Busqueda")]
+    partial class create_Busqueda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1680,36 +1683,7 @@ namespace newsApp.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
- feature/2-obtención-de-noticias
-            modelBuilder.Entity("newsApp.Noticias.Noticia", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Autor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("FechaPublicacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Fuente")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Titulo")
-
-
- feature/3-lista-de-busquedas
             modelBuilder.Entity("newsApp.Busquedas.Busqueda", b =>
-            modelBuilder.Entity("newsApp.Notificaciones.Notificacion", b =>
-            modelBuilder.Entity("newsApp.Temas.Tema", b =>
-
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1717,34 +1691,13 @@ namespace newsApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-
-                    b.Property<DateTime>("fechaAviso")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("mensajeDeTextoEncontrado")
- 
                     b.Property<string>("Texto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppNotificaciones", (string)null);
                     b.ToTable("AppBusquedas", (string)null);
-
-                    b.Property<string>("Nombre")
- master
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
- feature/2-obtención-de-noticias
-                    b.ToTable("AppNoticias", (string)null);
-
-                    b.ToTable("AppTemas", (string)null);
- master
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
