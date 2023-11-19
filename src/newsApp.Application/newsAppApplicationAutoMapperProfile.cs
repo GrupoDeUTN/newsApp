@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using newsApp.Temas;
 using newsApp.Noticias;
+using newsApp.Busquedas;
 
 namespace newsApp;
 
@@ -13,5 +14,6 @@ public class newsAppApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<Tema, TemaDto>();
         CreateMap<Noticia, NoticiaDto>();
+        CreateMap<Busqueda, BusquedaDto>();
     }
 }
