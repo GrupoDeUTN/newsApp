@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using newsApp.Temas;
 using newsApp.Noticias;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -56,6 +57,8 @@ public class newsAppDbContext :
     #endregion
 
     #region Entidades de dominio
+
+    public DbSet<Tema> Temas { get; set; } 
     public DbSet<Noticia> Noticias { get; set; }
     #endregion
 
@@ -88,6 +91,14 @@ public class newsAppDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        //Entidad tema
+        builder.Entity<Tema>(b =>
+        {
+            b.ToTable(newsAppConsts.DbTablePrefix + "Temas", newsAppConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Nombre).IsRequired().HasMaxLength(128);
+        });
 
         //Entidad noticia
         builder.Entity<Noticia>(b =>
