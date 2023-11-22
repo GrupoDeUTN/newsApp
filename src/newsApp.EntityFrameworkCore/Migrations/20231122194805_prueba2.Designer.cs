@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using newsApp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using newsApp.EntityFrameworkCore;
 namespace newsApp.Migrations
 {
     [DbContext(typeof(newsAppDbContext))]
-    partial class newsAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231122194805_prueba2")]
+    partial class prueba2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

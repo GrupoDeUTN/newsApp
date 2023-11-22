@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\newsApp.Application.Contracts\newsApp.Application.Contracts.csproj" />
+    <ProjectReference Include="..\newsApp.Application\newsApp.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

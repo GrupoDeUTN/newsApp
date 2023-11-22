@@ -1,4 +1,5 @@
-﻿using System;
+﻿using newsApp.Noticias;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,13 @@ namespace newsApp.Busquedas
         {
 
         }
+
+      //  public List<Noticia> GetHelloWorld()
+       // {
+         //   Noticia n = new Noticia();
+           // n.Titulo = "tit";
+           // return n;
+       // }
+
     }
 }

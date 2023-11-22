@@ -2,6 +2,7 @@
 using newsApp.Temas;
 using newsApp.Noticias;
 using newsApp.Busquedas;
+using newsApp.News;
 
 namespace newsApp;
 
@@ -15,5 +16,6 @@ public class newsAppApplicationAutoMapperProfile : Profile
         CreateMap<Tema, TemaDto>();
         CreateMap<Noticia, NoticiaDto>();
         CreateMap<Busqueda, BusquedaDto>();
+        CreateMap<NewsDto, ArticleDto>().ReverseMap();
     }
 }
